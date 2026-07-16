@@ -18,11 +18,11 @@ class Plant:
         self.grow()
         self.age_day()
 
-    def growth_week(self, week):
+    def growth_week(self, days):
         i = 1
         week_growth = 0
         self.show()
-        while i <= week:
+        while i <= days:
             self.growth_day()
             print(f"=== Day {i} ===")
             self.show()

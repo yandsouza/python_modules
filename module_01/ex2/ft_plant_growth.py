@@ -20,13 +20,15 @@ class Plant:
 
     def growth_week(self, week):
         i = 1
+        week_growth = 0
         self.show()
         while i <= week:
             self.growth_day()
             print(f"=== Day {i} ===")
             self.show()
+            week_growth += self.growth
             i += 1
-        print(f"Growth this week: {self.growth}cm")
+        print(f"Growth this week: {week_growth}cm")
 
 if __name__ == "__main__":
     print("=== Garden Plant Registry ===")

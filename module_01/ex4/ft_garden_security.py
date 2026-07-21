@@ -1,54 +1,54 @@
 class Plant:
-    def __init__(self, name, height, age, growth):
+    def __init__(self, name: str, height: float, age: int, growth: float):
         self._name = name
         self._height = height
         self._age = age
         self._growth = growth
 
-    def show(self):
-        print(f"{self._name}: {self._height}cm, {self._age} days old")
+    def show(self) -> None:
+        print(f"{self._name}: {self._height:.1f}cm, {self._age} days old")
 
-    def grow(self):
-        self.height += self.growth
+    def grow(self) -> None:
+        self._height += self._growth
 
-    def set_height(self, height):
-        if height < 0: 
-            print(f"{self._name.capitalize()}: Error, height can't be negative")
+    def set_height(self, height: float) -> None:
+        if height < 0:
+            print(f"{self._name}: Error, height can't be negative")
             print("Height update rejected")
         else:
             self._height = height
             print(f"Height updated: {round(self._height)}cm")
 
-    def get_height(self):
+    def get_height(self) -> float:
         return self._height
 
-    def set_age(self, age):
-        if age < 0: 
-            print(f"{self._name.capitalize()}: Error, age can't be negative")
+    def set_age(self, age: int) -> None:
+        if age < 0:
+            print(f"{self._name}: Error, age can't be negative")
             print("Age update rejected")
         else:
             self._age = age
             print(f"Age updated: {self._age} days")
 
-    def get_age(self):
+    def get_age(self) -> int:
         return self._age
 
-    def age_day(self):
-        self.age += 1
+    def age_day(self) -> None:
+        self._age += 1
 
-    def growth_day(self):
+    def growth_day(self) -> None:
         self.grow()
         self.age_day()
 
-    def growth_week(self, days):
-        week_growth = 0
+    def growth_week(self, days: int) -> None:
+        week_growth: float = 0
         self.show()
         for day in range(days):
             self.growth_day()
-            print(f"=== Day {day} ===")
+            print(f"=== Day {day + 1} ===")
             self.show()
             week_growth += self._growth
-        print(f"Growth this week: {week_growth}cm")
+        print(f"Growth this week: {week_growth:.1f}cm")
 
 
 if __name__ == "__main__":

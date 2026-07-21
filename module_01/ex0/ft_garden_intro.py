@@ -1,4 +1,6 @@
-def ft_garden_intro():
+#!/bin/python3
+
+def ft_garden_intro() -> None:
     plant: str = "Rose"
     Height: int = 25
     Age: int = 30
@@ -6,6 +8,7 @@ def ft_garden_intro():
     print(f"Plant: {plant}")
     print(f"Height: {Height}cm")
     print(f"Age: {Age} days")
+    print()
     print("=== End of Program ===")
 
 

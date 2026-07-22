@@ -23,7 +23,7 @@ class Plant:
             print("Height update rejected")
         else:
             self._height = height
-            print(f"Height updated: {round(self._height)}cm")
+            print(f"Height updated: {self._height:.1f}cm")
 
     def get_height(self) -> float:
         return self._height
@@ -81,7 +81,7 @@ class Flower(Plant):
 
     def bloom(self) -> None:
         self.blooming = True
-        print("[asking the rose to bloom]")
+        print(f"[asking the {self._name} to bloom]")
 
 
 class Tree(Plant):
@@ -101,9 +101,11 @@ class Tree(Plant):
         print(f" Trunk diameter: {self.trunk_diameter:.1f}cm")
 
     def produce_shade(self) -> None:
-        print("[asking the oak to produce shade]")
-        print(f"Tree Oak now produces a shade of {self._height:.1f}cm "
+        print(f"[asking the {self._name} to produce shade]\n"
+              f"Tree {self._name} now produces "
+              f"a shade of {self._height:.1f}cm "
               f"long and {self.trunk_diameter:.1f}cm wide.")
+
 
 class Vegetable(Plant):
     def __init__(
@@ -112,7 +114,7 @@ class Vegetable(Plant):
             height: float,
             age: int,
             growth: float,
-            harvest_season: str, 
+            harvest_season: str,
             nutritional_value: int
     ):
         super().__init__(name, height, age, growth)
@@ -129,6 +131,7 @@ class Vegetable(Plant):
         for day in range(days):
             self.growth_day()
             self.nutritional_value += 1
+
 
 if __name__ == "__main__":
     print("=== Garden Plant Types ===")

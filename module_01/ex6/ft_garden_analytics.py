@@ -193,8 +193,9 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         self._statistics.inc_shade_stat()
-        print("[asking the oak to produce shade]")
-        print(f"Tree Oak now produces a shade of {self._height:.1f}cm "
+        print(f"[asking the {self._name} to produce shade]\n"
+              f"Tree {self._name} now produces "
+              f"a shade of {self._height:.1f}cm "
               f"long and {self.trunk_diameter:.1f}cm wide.")
 
 

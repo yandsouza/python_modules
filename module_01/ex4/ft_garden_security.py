@@ -17,7 +17,7 @@ class Plant:
             print("Height update rejected")
         else:
             self._height = height
-            print(f"Height updated: {round(self._height)}cm")
+            print(f"Height updated: {self._height:.1f}cm")
 
     def get_height(self) -> float:
         return self._height

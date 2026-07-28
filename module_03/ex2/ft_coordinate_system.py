@@ -12,7 +12,8 @@ def validade_list(cord: str) -> float | None:
 
 def get_player_pos() -> tuple[float, float, float]:
     while True:
-        cords_input = input("Enter new coordinates as floats in format 'x,y,z': ")
+        cords_input = input("Enter new coordinates as "
+                            "floats in format 'x,y,z': ")
         cords = cords_input.split(',')
 
         if len(cords) != 3:

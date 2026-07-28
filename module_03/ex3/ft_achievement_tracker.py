@@ -1,7 +1,7 @@
 import random
 
 
-def gen_player_achievements():
+def gen_player_achievements() -> set[str]:
     achievements = [
         "Crafting Genius",
         "Strategist",
@@ -18,32 +18,49 @@ def gen_player_achievements():
         "Sharp Mind",
         "Boss Slayer"]
 
-    random_achievs = []
-    for achiv in range(random.randrange(len(achievements))):
-        random_achievs.append(random.choice(achievements))
-    return set(random_achievs)
+    random_num = random.randrange(1, len(achievements) + 1)
+    return set(random.sample(achievements, random_num))
+
 
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===")
     print()
 
-    player_alice = gen_player_achievements()
-    print(f"Player Alice: {player_alice}")
-    player_bob = gen_player_achievements()
-    print(f"Player Bob: {player_bob}")
-    player_charlie = gen_player_achievements()
-    print(f"Player Charlie: {player_charlie}")
-    player_dylan = gen_player_achievements()
-    print(f"Player Dylan: {player_dylan}")
-    print()
-    
-    print(f"All distinct achievements: {set.union(player_charlie, player_bob, player_charlie, player_dylan)}")
+    players = [gen_player_achievements() for player in "0123"]
+
+    print(f"Player Alice: {players[0]}")
+    print(f"Player Bob: {players[1]}")
+    print(f"Player Charlie: {players[2]}")
+    print(f"Player Dylan: {players[3]}")
     print()
 
-    print(f"Common achievements: {set.intersection(player_charlie, player_bob, player_charlie, player_dylan)}")
+    all_achievements = set.union(*players)
+    print(f"All distinct achievements: {all_achievements}")
     print()
 
-    print(f"Only Alice has: {set.difference(player_charlie, player_bob, player_charlie, player_dylan)}")
-    print(f"Only Bob has: {set.difference(player_charlie, player_bob, player_charlie, player_dylan)}")
-    print(f"Only Charlie has: {set.difference(player_charlie, player_bob, player_charlie, player_dylan)}")
-    print(f"Only Dylan has: {set.difference(player_charlie, player_bob, player_charlie, player_dylan)}")
+    print(f"Common achievements: {set.intersection(*players)}")
+    print()
+
+    others_alice = set.union(players[1], players[2], players[3])
+    others_bob = set.union(players[0], players[2], players[3])
+    others_charlie = set.union(players[0], players[1], players[3])
+    others_dylan = set.union(players[0], players[1], players[2])
+    print(f"Only Alice has: "
+          f"{set.difference(players[0], others_alice)}")
+    print(f"Only Bob has: "
+          f"{set.difference(players[1], others_bob)}")
+    print(f"Only Charlie has: "
+          f"{set.difference(players[2], others_charlie)}")
+    print(f"Only Dylan has: "
+          f"{set.difference(players[3], others_dylan)}")
+    print()
+
+    print(f"Alice is missing: "
+          f"{set.difference(all_achievements, players[0])}")
+    print(f"Bob is missing: "
+          f"{set.difference(all_achievements, players[1])}")
+    print(f"Charlie is missing: "
+          f"{set.difference(all_achievements, players[2])}")
+    print(f"Dylan is missing: "
+          f"{set.difference(all_achievements, players[3])}")
+    print()

@@ -10,9 +10,11 @@ def print_file() -> None:
         print(f"Accessing file '{sys.argv[1]}'")
         file = open(sys.argv[1], "r")
     except FileNotFoundError as error:
-        print(f"[STDERR] Error opening file {sys.argv[1]}: {error}", file=sys.stderr)
+        print(f"[STDERR] Error opening file {sys.argv[1]}: {error}",
+              file=sys.stderr)
     except PermissionError as error:
-        print(f"[STDERR] Error opening file {sys.argv[1]}: {error}", file=sys.stderr)
+        print(f"[STDERR] Error opening file {sys.argv[1]}: {error}",
+              file=sys.stderr)
     else:
         print("---\n")
         r_file = file.read()
@@ -40,9 +42,11 @@ def write_file() -> None:
         try:
             file_to_write = open(file_to_save, "r+")
         except FileNotFoundError as error:
-            print(f"[STDERR] Error opening file {sys.argv[1]}: {error}", file=sys.stderr)
+            print(f"[STDERR] Error opening file {sys.argv[1]}: {error}",
+                  file=sys.stderr)
         except PermissionError as error:
-            print(f"[STDERR] Error opening file {sys.argv[1]}: {error}", file=sys.stderr)
+            print(f"[STDERR] Error opening file {sys.argv[1]}: {error}",
+                  file=sys.stderr)
         else:
             file_to_write.write(updated_lines)
             print(f"Saving data to '{file_to_save}\n"

@@ -24,4 +24,4 @@ def print_file() -> None:
 
 if __name__ == "__main__":
     print("=== Cyber Archives Recovery ===")
-    write_file()
+    print_file()

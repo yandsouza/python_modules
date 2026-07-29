@@ -38,6 +38,8 @@ def write_file() -> None:
     if file_to_save:
         file_to_write = open(file_to_save, "w")
         file_to_write.write(updated_lines)
+        print(f"Saving data to '{file_to_save}\n"
+              f"Data saved in file '{file_to_save}'.")
     else:
         print("Not saving data.")
 

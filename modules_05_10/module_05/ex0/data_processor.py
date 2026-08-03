@@ -51,6 +51,20 @@ class TextProcessor(DataProcessor):
                 self.store_data(value)
 
 
+class LogProcessor(DataProcessor):
+    def validate(self, data: Any) -> bool:
+        return isinstance(data, dict)
+
+    def ingest(self, data: str | list[str]) -> None:
+        if not self.validate(data):
+            raise ValueError("Incorrect text data")
+        if isinstance(data, dict):
+            self.store_data(data)
+        else:
+            for value in data:
+                self.store_data(value)
+
+
 if __name__ == "__main__":
     print("=== Code Nexus - Data Processor ===")
     print()
@@ -76,4 +90,20 @@ if __name__ == "__main__":
     print(" Extracting 3 values...")
     for _ in range(3):
         rank, value = data_int.output()
+        print(f" Extracting value {rank}: {value}")
+    print()
+
+    data_str = TextProcessor()
+    print("Testing Text Processor...")
+    print(" Trying to validate input '42':",
+          data_str.validate(42))
+
+    list_str = ['Hello', 'Nexus', 'World']
+    print(f" Processing data: {list_str}")
+    for text in list_str:
+        data_str.ingest(text)
+
+    print(" Extracting 1 values...")
+    for _ in range(1):
+        rank, value = data_str.output()
         print(f" Extracting value {rank}: {value}")

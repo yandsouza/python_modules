@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "loading"
+version = "0.1.0"
+description = "Matrix audio stream generator and analysis"
+authors = ["ynascime <ynascime@student.42.fr>"]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+pandas = "^3.0.5"
+numpy = "^2.5.2"
+matplotlib = "^3.11.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

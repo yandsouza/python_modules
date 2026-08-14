@@ -1,3 +1,8 @@
+from collections.abc import Callable
+from functools import wraps
+from typing import Any
+import time
+
 def spell_timer(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -14,15 +19,14 @@ def spell_timer(func: Callable) -> Callable:
 def power_validator(min_power: int) -> Callable:
     def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args: tuple[object], **kwargs: dict[str, object]) -> Any:
-            power = int(str(kwargs.get(
-                "power",
-                args[1] if len(args) > 2 else args[0] if args else 0)))
+        def wrapper(*args, **kwargs):
+            power = kwargs.get("power", args[-1] if args else 0)
             if power < min_power:
                 return "Insufficient power for this spell"
-            return func(power, *args, **kwargs)
+            return func(*args, **kwargs)
         return wrapper
     return decorator
+
 
 def retry_spell(max_attempts: int) -> Callable:
     def decorator(func: Callable) -> Callable:

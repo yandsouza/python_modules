@@ -1,7 +1,8 @@
 from collections.abc import Callable
 from functools import wraps
-from typing import Any
 import time
+import random
+
 
 def spell_timer(func: Callable) -> Callable:
     @wraps(func)
@@ -22,7 +23,7 @@ def power_validator(min_power: int) -> Callable:
         def wrapper(*args, **kwargs):
             power = kwargs.get("power", args[-1] if args else 0)
             if power < min_power:
-                return "Insufficient power for this spell"
+                return "Insufficient power"
             return func(*args, **kwargs)
         return wrapper
     return decorator
@@ -43,11 +44,12 @@ def retry_spell(max_attempts: int) -> Callable:
         return wrapper
     return decorator
 
+
 class MageGuild:
     @staticmethod
     def validate_mage_name(name: str) -> bool:
-        clean_name = name.replace(" ", "")
-        return len(clean_name) >= 3 and clean_name.isalpha()
+        name_no_space = name.replace(" ", "")
+        return len(name_no_space) >= 3 and name_no_space.isalpha()
 
     @power_validator(10)
     def cast_spell(self, spell_name: str, power: int) -> str:
@@ -55,31 +57,41 @@ class MageGuild:
 
 
 if __name__ == "__main__":
+    print("=========Master’s Tower=========")
+    print()
+
+    print("Time execution decorator:")
+
     @spell_timer
-    def spell_caster(spell: str, damge: int) -> str:
-        time.sleep(0.2)
-        return f"{spell} casted and {damge} done"
+    def fireball() -> str:
+        time.sleep(0.101)
+        return "Result: Fireball cast!"
+    print(fireball())
+    print()
 
-    print(spell_caster("Fire", 200))
+    print("Parameterized validation decorator:")
 
-    print("\n## Testing power_validator...\n")
-
-    @power_validator(100)
-    def powerful_spell(spell: str, power: int) -> str:
+    @power_validator(25)
+    def spell_caster(spell: str, power: int) -> str:
         return f"{spell} casted with power {power}"
-    print(powerful_spell("Lightning", 150))
-    print(powerful_spell("Lightning", 50))
+    print(spell_caster("Water Blast", 50))
+    print(spell_caster("Water Blast", 5))
+    print()
 
-    print("\n## Testing retry_spell...\n")
+    print("Retry decorator:")
 
-    @retry_spell(5)
+    @retry_spell(3)
     def retrying_spell():
-        raise ValueError("boom")
-    print(retrying_spell())
+        if random.random() < 0.8:
+            raise ValueError("Spell not casted!")
+        return "Waaaaaaagh spelled !"
 
-    print("\n## Testing power_validator...\n")
+    print(retrying_spell())
+    print()
+
+    print("Demonstrate staticmethod:")
     guild = MageGuild()
-    print(MageGuild.validate_mage_name("ahmad"))
-    print(MageGuild.validate_mage_name("9x"))
+    print(MageGuild.validate_mage_name("John"))
+    print(MageGuild.validate_mage_name("Jo35"))
     print(guild.cast_spell("Fire", 15))
     print(guild.cast_spell("Water", 5))

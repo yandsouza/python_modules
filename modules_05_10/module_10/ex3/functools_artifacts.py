@@ -67,30 +67,33 @@ if __name__ == "__main__":
     print()
 
     spell_powers = [10, 30, 40, 20]
+    print("Reduce spell powers:")
     try:
-        print(f"Sum: {spell_reducer(spell_powers, "add")}")
-        print(f"Product: {spell_reducer(spell_powers, "multiply")}")
-        print(f"Max: {spell_reducer(spell_powers, "max")}")
-        print(f"{spell_reducer(spell_powers, "invalid")}")
+        print(f"Sum: {spell_reducer(spell_powers, 'add')}")
+        print(f"Product: {spell_reducer(spell_powers, 'multiply')}")
+        print(f"Max: {spell_reducer(spell_powers, 'max')}")
+        print(f"{spell_reducer(spell_powers, 'invalid')}")
     except ValueError as error:
         print(error)
     print()
 
+    print("Create partial applications:")
     enchants = partial_enchanter(base_enchantment)
     print(enchants["wind"](target="Dragon"))
     print(enchants["fire"](target="Orc"))
     print(enchants["water"](target="Fairy"))
     print()
 
+    print("Cached fibonacci:")
     print("Fib(0):", memoized_fibonacci(0))
     print("Fib(1):", memoized_fibonacci(1))
     print("Fib(10):", memoized_fibonacci(10))
-    print("Cache info:", memoized_fibonacci.cache_info())
     print("Fib(15):", memoized_fibonacci(15))
     print("Fib(15):", memoized_fibonacci(15))
     print("Cache info:", memoized_fibonacci.cache_info())
     print()
 
+    print("Create single dispatch system:")
     spell_system = spell_dispatcher()
     print(spell_system(42))
     print(spell_system("fireball"))
